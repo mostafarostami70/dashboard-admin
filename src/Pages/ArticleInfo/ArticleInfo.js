@@ -69,10 +69,10 @@ const ArticleInfo = () => {
                       <a href="#" class="article-read__link">معرفی بهترین سایت ‌های آموزش جاوا اسکریپت:</a>
                     </li>
                     <li class="article-read__item">
-                      <a href="#" class="article-read__link">یک راه آسان‌تر، دوره‌ های جاوا اسکریپت آکادمی سبزلرن!</a>
+                      <a href="#" class="article-read__link">یک راه آسان‌تر، دوره‌ های جاوا اسکریپت  !</a>
                     </li>
                     <li class="article-read__item">
-                      <a href="#" class="article-read__link">ثبت نام در دوره‌ های جاوا اسکریپت سبزلرن:</a>
+                      <a href="#" class="article-read__link">ثبت نام در دوره‌ های جاوا اسکریپت :</a>
                     </li>
                   </ul>
                 </div>

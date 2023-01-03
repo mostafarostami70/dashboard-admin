@@ -5,6 +5,8 @@ import { Navbar } from "../../Components/Navbar/Navbar";
 import { Topbar } from "../../Components/Topbar/Topbar";
 import { Button } from "../Form/Button";
 import { Input } from "../Form/Input";
+import { UseForm } from '../Hooks/UseForm'
+
 
 import { requiredValidator, minValidator, maxValidator, emailValidator } from "../Validators/Rules";
 
@@ -12,6 +14,19 @@ import "./Login.css";
 
 
 const Login = () => {
+
+  const [formState, onInputHandler] = UseForm({
+    username: {
+      value: '',
+      isValid: false
+    },
+    password: {
+      value: '',
+      isValid: false
+    }
+  }, false)
+
+  console.log(formState)
 
   const loginUser = (event) => {
     event.preventDefault()
@@ -40,6 +55,7 @@ const Login = () => {
 
               <Input
                 element="input"
+                id="username"
                 className="login-form__username-input"
                 type="text"
                 placeholder="نام کاربری یا آدرس ایمیل"
@@ -48,7 +64,9 @@ const Login = () => {
                   requiredValidator(),
                   minValidator(6),
                   maxValidator(20)
+
                 ]}
+                onInputHandler={onInputHandler}
               />
 
               <i class="login-form__username-icon fa fa-user"></i>
@@ -56,6 +74,7 @@ const Login = () => {
             <div class="login-form__password">
               <Input
                 element="input"
+                id="password"
                 className="login-form__password-input"
                 type="text"
                 placeholder="رمز عبور"
@@ -65,6 +84,8 @@ const Login = () => {
                   minValidator(6),
                   maxValidator(20)
                 ]}
+                onInputHandler={onInputHandler}
+
               />
               <i class="login-form__password-icon fa fa-lock-open"></i>
             </div>

@@ -307,7 +307,7 @@ const CourseInfo = () => {
                     </span>
                   </div>
                   <span class="course-info__short-url">
-                    https://sabzlearn.ir/?p=117472
+                    https://naghshclick.org
                   </span>
                 </div>
                 <div class="course-info">
