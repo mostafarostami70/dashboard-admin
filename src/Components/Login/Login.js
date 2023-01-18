@@ -6,6 +6,7 @@ import { Topbar } from "../../Components/Topbar/Topbar";
 import { Button } from "../Form/Button";
 import { Input } from "../Form/Input";
 import { UseForm } from '../Hooks/UseForm'
+import './Login.css'
 
 
 import { requiredValidator, minValidator, maxValidator, emailValidator } from "../Validators/Rules";
@@ -63,8 +64,8 @@ const Login = () => {
                 {[
                   requiredValidator(),
                   minValidator(6),
-                  maxValidator(20)
-
+                  maxValidator(20),
+                  emailValidator()
                 ]}
                 onInputHandler={onInputHandler}
               />
@@ -94,7 +95,9 @@ const Login = () => {
               <span class="login-form__btn-text">ورود</span>
             </button> */}
 
-            <Button className="login-form__btn" type="submit" onClick={loginUser} disabled={false}>
+            <Button 
+            className={`login-form__btn ${formState.isFormValid ? 'login-form-btn-success' : 'login-form-btn-error ' }`}
+             type="submit" onClick={loginUser} disabled={!formState.isFormValid}>
               <i class="login-form__btn-icon fas fa-sign-out-alt"></i>
               <span class="login-form__btn-text">ورود</span>
             </Button>

@@ -122,6 +122,14 @@
   position: relative;
 }
 
+.login-form-btn-success {
+  background-color: #2bce56;
+}
+.login-form-btn-error {
+  background-color: #df3333;
+  cursor: none;
+}
+
 .login-form__btn-icon {
   color: var(--white-color);
   font-size: 1.8rem;

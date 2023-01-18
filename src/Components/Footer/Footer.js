@@ -38,10 +38,9 @@ export const Footer = () => {
             </div>
             <div class="footer__copyright">
                 <span class="footer__copyright-text">
-                    کلیه حقوق برای آکادمی آموزش برنامه نویسی سبز لرن محفوظ است.
+                    کلیه حقوق برای آکادمی نقش کلیک محفوظ است.
                 </span>
             </div>
         </footer>
-
     )
 }

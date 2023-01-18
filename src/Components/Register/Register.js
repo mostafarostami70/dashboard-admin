@@ -5,6 +5,7 @@ import { Navbar } from "../../Components/Navbar/Navbar";
 import { Topbar } from "../../Components/Topbar/Topbar";
 import { Button } from "../Form/Button";
 import { Input } from "../Form/Input";
+import { UseForm } from '../Hooks/UseForm'
 import { requiredValidator, minValidator, maxValidator, emailValidator } from "../Validators/Rules";
 
 import "./Register.css";
@@ -12,10 +13,56 @@ import "./Register.css";
 
 const Register = () => {
 
+  const [formState, onInputHandler] = UseForm({
+    name: {
+      value: '',
+      isValid: false
+    },
+    username: {
+      value: '',
+      isValid: false
+    },
+    password: {
+      value: '',
+      isValid: false
+    },
+    email: {
+      value: '',
+      isValid: false
+    }
+  }, false)
+
+
+
   const registerNewUser = (event) => {
     event.preventDefault()
-    console.log('reg')
+
+    const newUserInfo =
+    {
+      "name": formState.inputs.name.value,
+      "username": formState.inputs.username.value,
+      "email": formState.inputs.email.value,
+      "password": formState.inputs.password.value,
+      "confirmPassword": formState.inputs.password,
+      "phone": "09374107806",
+      "role" : "ADMIN"
+    }
+
+    console.log(newUserInfo)
+
+    fetch("http://localhost:4000/v1/auth/register",
+    {
+      method: "POST",
+      headers : {
+      "Content-Type" : "application/json"
+      },
+      body : JSON.stringify(newUserInfo),
+    }).then(res => res.json()).then(result => console.log(result)).catch(e => console.log(e))
   }
+
+
+
+
   return (
     <>
       <Topbar />
@@ -35,6 +82,24 @@ const Register = () => {
             <div class="login-form__username">
               <Input
                 element="input"
+                id="name"
+                className="login-form__username-input"
+                type="text"
+                placeholder="نام و نام خانوادگی"
+                validations=
+                {[
+                  requiredValidator(),
+                  minValidator(6),
+                  maxValidator(20)
+                ]}
+                onInputHandler={onInputHandler}
+              />
+              <i class="login-form__username-icon fa fa-user"></i>
+            </div>
+            <div class="login-form__username">
+              <Input
+                element="input"
+                id="username"
                 className="login-form__username-input"
                 type="text"
                 placeholder="نام کاربری"
@@ -44,12 +109,14 @@ const Register = () => {
                   minValidator(6),
                   maxValidator(20)
                 ]}
+                onInputHandler={onInputHandler}
               />
               <i class="login-form__username-icon fa fa-user"></i>
             </div>
             <div class="login-form__password">
               <Input
                 element="input"
+                id="email"
                 className="login-form__password-input"
                 type="text"
                 placeholder="آدرس ایمیل"
@@ -57,15 +124,18 @@ const Register = () => {
                 {[
                   requiredValidator(),
                   minValidator(6),
-                  maxValidator(20),
+                  maxValidator(30),
                   emailValidator()
-                ]} />
+                ]}
+                onInputHandler={onInputHandler}
+              />
 
               <i class="login-form__password-icon fa fa-envelope"></i>
             </div>
             <div class="login-form__password">
               <Input
                 element="input"
+                id="password"
                 className="login-form__password-input"
                 type="text"
                 placeholder="رمز عبور"
@@ -74,12 +144,16 @@ const Register = () => {
                   requiredValidator(),
                   minValidator(6),
                   maxValidator(20)
-                ]} />
+                ]}
+                onInputHandler={onInputHandler}
+              />
 
               <i class="login-form__password-icon fa fa-lock-open"></i>
             </div>
 
-            <Button className="login-form__btn" type="submit" onClick={registerNewUser} disabled={false}>
+            <Button
+              className={`login-form__btn ${formState.isFormValid ? 'login-form-btn-success' : 'login-form-btn-error '}`}
+              type="submit" onClick={registerNewUser} disabled={!formState.isFormValid}>
               <i class="login-form__btn-icon fa fa-user-plus"></i>
               <span class="login-form__btn-text">عضویت</span>
             </Button>
